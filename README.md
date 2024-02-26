@@ -1,4 +1,4 @@
-# [Mom Recipe](https://moms-recipe.app)
+# [Mom Recipe](https://moms-recipe.vercel.app)
 
 An open source recipe generator powered by OpenAi and ChatGPT.
 
