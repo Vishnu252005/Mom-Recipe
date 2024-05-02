@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "faultyled",
-      url: "https://github.com/giacomogaglione",
+      name: "Vishnu",
+      url: "https://github.com/vishnu252005",
     },
   ],
-  creator: "faultyled",
+  creator: "Vishnu",
   openGraph: {
     type: "website",
     locale: "en_US",
