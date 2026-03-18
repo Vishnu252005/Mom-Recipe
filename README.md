@@ -12,7 +12,6 @@ This project is still in development and is not ready for production use.
 - **Framework**: [Next.js](https://nextjs.org/) 14 App Router with Server Actions
 - **AI**: [OpenAI - GPT 3.5 Turbo](https://openai.com) with [Vercel AI SDK](https://sdk.vercel.ai)
 - **Database**: [Supabase](https://supabase.com/)
-- **Authentication**: [Clerk](https://clerk.com/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
   - **Primitives**: [Radix UI](https://radix-ui.com/)
   - **Components**: [shadcn/ui](https://ui.shadcn.com/)

@@ -1,5 +1,4 @@
 import { type Metadata } from "next"
-import { SignUp } from "@clerk/nextjs"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chef-genie.app"),
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
 export default function SignUpPage() {
   return (
     <div className="mt-2 md:mt-8">
-      <SignUp />
+      <div>Sign up functionality removed</div>
     </div>
   )
 }

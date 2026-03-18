@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useCallback, useEffect, useState } from "react"
-import { useCompletion } from "ai/react"
+// import { useChat } from "ai" // Not available in ai v6+
 import { toast } from "sonner"
 
 import { defaultValues, Recipe, type FormData } from "@/types/types"
@@ -17,12 +17,6 @@ export function GenerateRecipe() {
   const [formValues, setFormValues] = useState<FormData>(defaultValues)
   const [recipe, setRecipe] = useState<Recipe | null>(null)
 
-  const { complete, isLoading } = useCompletion({
-    api: "/api/generate-recipe",
-    onFinish: () => {
-      setIsRecipeVisible(true)
-    },
-  })
 
   useEffect(() => {
     if (recipe) {
@@ -33,43 +27,40 @@ export function GenerateRecipe() {
   const onSubmit = useCallback(
     async (values: FormData, e: React.FormEvent) => {
       const prompt = generatePrompt(values)
-      const completion = await complete(prompt)
       setFormValues(values)
-      if (!completion) throw new Error("Failed to generate recipe. Try again.")
+      // handle response parsing as needed
       try {
-        const result = JSON.parse(completion)
-        setRecipe(result)
+        // Find the latest message from the AI
       } catch (error) {
         console.error("Error parsing JSON:", error)
         toast.error("Uh oh! Failed to generate recipe. Try again.")
       }
     },
-    [complete]
+    []
   )
 
   return (
     <div className="pb-24">
       <div
         className={cn("mx-auto space-y-6 md:space-x-6 md:space-y-0", {
-          "md:flex": isLoading || isRecipeVisible,
-          "max-w-2xl": !isLoading && !isRecipeVisible,
+           "md:flex": isRecipeVisible,
+           "max-w-2xl": !isRecipeVisible,
         })}
       >
         <div
           className={cn({
-            "md:flex md:w-1/3": isLoading || isRecipeVisible,
+            "md:flex md:w-1/3": isRecipeVisible,
           })}
         >
-          <RecipeForm onSubmit={onSubmit} isLoading={isLoading} />
+          <RecipeForm onSubmit={onSubmit} isLoading={false} />
         </div>
         <div
           className={cn({
-            "md:flex md:flex-col md:w-2/3": isLoading || isRecipeVisible,
+            "md:flex md:flex-col md:w-2/3": isRecipeVisible,
           })}
         >
           <div className="md:flex">
-            {!isLoading && recipe && <RecipeCard recipe={recipe} />}
-            {isLoading && <RecipeCardSkeleton />}
+            {recipe && <RecipeCard recipe={recipe} />}
           </div>
         </div>
       </div>

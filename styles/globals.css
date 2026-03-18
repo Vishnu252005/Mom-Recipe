@@ -55,54 +55,60 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
-.cl-card {
-  @apply bg-popover text-foreground;
-}
+ .cl-card {
+   background-color: hsl(var(--popover));
+   color: hsl(var(--foreground));
+ }
 
-.cl-headerTitle {
-  @apply text-foreground;
-}
+ .cl-headerTitle {
+   color: hsl(var(--foreground));
+ }
 
-.cl-headerSubtitle,
-.cl-userButtonPopoverActionButtonText,
-.cl-dividerText,
-.cl-footerActionText {
-  @apply text-muted-foreground;
-}
+ .cl-headerSubtitle,
+ .cl-userButtonPopoverActionButtonText,
+ .cl-dividerText,
+ .cl-footerActionText {
+   color: hsl(var(--muted-foreground));
+ }
 
-.cl-dividerLine {
-  @apply bg-muted;
-}
+ .cl-dividerLine {
+   background-color: hsl(var(--muted));
+ }
 
-.cl-socialButtonsBlockButton {
-  @apply text-muted-foreground border-input;
-}
+ .cl-socialButtonsBlockButton {
+   color: hsl(var(--muted-foreground));
+   border-color: hsl(var(--input));
+ }
 
-.cl-formFieldLabel {
-  @apply text-foreground;
-}
+ .cl-formFieldLabel {
+   color: hsl(var(--foreground));
+ }
 
-.cl-formFieldInput {
-  @apply bg-transparent text-foreground border-input;
-}
+ .cl-formFieldInput {
+   background-color: transparent;
+   color: hsl(var(--foreground));
+   border-color: hsl(var(--input));
+ }
 
 .cl-page {
-  @apply text-foreground;
+  color: hsl(var(--foreground));
 }
 
-.cl-profileSectionTitleText, .cl-userPreview, .cl-accordionTriggerButton {
-  @apply text-foreground;
-}
+ .cl-profileSectionTitleText, .cl-userPreview, .cl-accordionTriggerButton {
+   color: hsl(var(--foreground));
+ }
 
 @layer components {
   .skeleton {
-    @apply relative before:animate-shimmer before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-black/[0.08] before:to-transparent before:z-50 overflow-hidden;
+    @apply relative overflow-hidden;
+    /* Add custom shimmer animation here if needed */
   }
 }

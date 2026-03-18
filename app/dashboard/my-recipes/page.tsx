@@ -1,5 +1,4 @@
 import { type Metadata } from "next"
-import { auth } from "@clerk/nextjs"
 
 import type { Tables } from "@/types/database.types"
 import { supabaseClient } from "@/lib/supabase-client"
@@ -22,47 +21,6 @@ export const metadata: Metadata = {
     "Explore your saved recipes in one place. Your culinary journey starts here!",
 }
 
-async function getRecipesPrivate(): Promise<RecipeTable[] | null> {
-  const { getToken, userId } = auth()
-  const supabaseAccessToken = await getToken({ template: "moms-recipe" })
-  const supabase = await supabaseClient(supabaseAccessToken as string)
-  try {
-    const { data: recipes } = await supabase
-      .from("recipes")
-      .select()
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false })
-
-    return recipes || null
-  } catch (error) {
-    console.error("Error:", error)
-    return null
-  }
-}
-
-export default async function RecipePage() {
-  const { getToken, userId } = auth()
-  const supabaseAccessToken = await getToken({ template: "moms-recipe" })
-  const recipes = await getRecipesByUserId(userId, supabaseAccessToken)
-  const data = await getRecipesPrivate()
-
-  return (
-    <div className="container grid">
-      <PageHeader>
-        <PageHeaderHeading>Your Culinary Creations</PageHeaderHeading>
-        <PageHeaderDescription>
-          Explore your saved recipes in one place. Your culinary journey starts
-          here!
-        </PageHeaderDescription>
-      </PageHeader>
-      {data && <DataTable columns={columns} data={data} />}
-      <div className="grid gap-4 md:grid-cols-3">
-        {recipes?.map((recipe) => (
-          <div key={recipe.id}>
-            <RecipeCardPreview recipe={recipe as Recipe} isPrivate />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+export default function RecipePage() {
+  return <div>Recipe list unavailable (Clerk removed)</div>
 }

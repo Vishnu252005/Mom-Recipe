@@ -1,17 +1,11 @@
-import { OpenAIStream, StreamingTextResponse } from "ai"
 import OpenAI from "openai"
 
 export const runtime = "edge"
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-})
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
 
 export async function POST(req: Request) {
-  // Extract the `messages` from the body of the request
   const { prompt } = await req.json()
-
-  // Request the OpenAI API for the response based on the prompt
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     temperature: 0.6,
@@ -26,8 +20,5 @@ export async function POST(req: Request) {
     ],
     response_format: { type: "json_object" },
   })
-
-  const stream = OpenAIStream(response)
-
-  return new StreamingTextResponse(stream)
+  return new Response(response.toReadableStream(), { headers: { 'Content-Type': 'application/json' } })
 }

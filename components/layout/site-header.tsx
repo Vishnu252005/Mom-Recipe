@@ -1,6 +1,4 @@
 import Link from "next/link"
-import { SignOutButton } from "@clerk/nextjs"
-import type { User } from "@clerk/nextjs/dist/types/server"
 
 import { siteConfig } from "@/config/site"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -20,7 +18,7 @@ import { MainNav } from "@/components/layout/main-nav"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 
 interface SiteHeaderProps {
-  user: User | null
+  user: any | null
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
@@ -84,7 +82,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <Icons.logout className="mr-2 size-4" aria-hidden="true" />
-                    <SignOutButton />
+                    <span>Sign out removed</span>
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

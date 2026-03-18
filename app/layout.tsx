@@ -1,7 +1,6 @@
 import "@/styles/globals.css"
 
 import { Metadata, Viewport } from "next"
-import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "sonner"
@@ -58,11 +57,11 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: "@vishnu",
-  },
-  icons: {
-    icon: "/favicon1.ico",
-  },
-}
+    },
+    icons: {
+      icon: "/favicon1.ico",
+    },
+};
 
 export const viewport: Viewport = {
   colorScheme: "dark light",
@@ -70,31 +69,28 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
+// ...existing code...
 
-interface RootLayoutProps {
-  children: React.ReactNode
-}
+// ...existing code...
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <SpeedInsights />
-            <Analytics />
-          </ThemeProvider>
-          <Toaster richColors />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <SpeedInsights />
+          <Analytics />
+        </ThemeProvider>
+        <Toaster richColors />
+      </body>
+    </html>
   )
+}
 }
